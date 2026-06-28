@@ -21,13 +21,13 @@ import com.portfolio.my_portfolio_backend.service.IPersonalInfoService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/test-personal-info")
+@RequestMapping("/api/personal-info")
 @RequiredArgsConstructor
-public class PersonalInfoTestController {
+public class PersonalInfoController {
 
     private final IPersonalInfoService personalInfoService;
 
-    @GetMapping("/all")
+    @GetMapping
     public List<PersonalInfo> findAll(){
         return personalInfoService.findAll();
     }
@@ -46,6 +46,18 @@ public class PersonalInfoTestController {
     public ResponseEntity<PersonalInfo> create(@RequestBody PersonalInfo personalInfo){
         PersonalInfo newPersonalInfo = this.personalInfoService.save(personalInfo);
         return new ResponseEntity<>(newPersonalInfo, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PersonalInfo> create(@RequestBody PersonalInfo personalInfo, @PathVariable Long id){
+        personalInfo.setId(id);
+        PersonalInfo newPersonalInfo = this.personalInfoService.save(personalInfo);
+        return new ResponseEntity<>(newPersonalInfo, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteByiD(@PathVariable Long id){
+        this.personalInfoService.deleteById(id);
     }
 
 }
