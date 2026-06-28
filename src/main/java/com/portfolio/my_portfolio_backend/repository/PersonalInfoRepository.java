@@ -33,7 +33,7 @@ public class PersonalInfoRepository implements IPersonalInfoRepository {
         info.setTitle(res.getString("title"));
         info.setProfileDescription(res.getString("profile_description"));
         info.setProfileImageUrl(res.getString("profile_image_url"));
-        info.setYearsOfExperience(res.getObject("years_or_experience", Integer.class)); // Usar getObject para nulos
+        info.setYearsOfExperience(res.getObject("years_of_experience", Integer.class)); // Usar getObject para nulos
         info.setEmail(res.getString("email"));
         info.setPhone(res.getString("phone"));
         info.setLinkedinUrl(res.getString("linkedin_url"));
@@ -45,7 +45,7 @@ public class PersonalInfoRepository implements IPersonalInfoRepository {
     public PersonalInfo save(PersonalInfo personalInfo) {
         if (personalInfo.getId() == null) {
             String sql = """
-                    insert into personal_info (first_name, last_name, title, profile_description, profile_image_url, years_or_experience, email, phone, linkedin_url, github_url)
+                    insert into personal_info (first_name, last_name, title, profile_description, profile_image_url, years_of_experience, email, phone, linkedin_url, github_url)
                     values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                                         """;
             KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -75,7 +75,7 @@ public class PersonalInfoRepository implements IPersonalInfoRepository {
 
             String sql = """
                     update personal_info
-                    set first_name=?, last_name=?, title=?, profile_description=?, profile_image_url=?, years_or_experience=?, email=?, phone=?, linkedin_url=?, github_url=?
+                    set first_name=?, last_name=?, title=?, profile_description=?, profile_image_url=?, years_of_experience=?, email=?, phone=?, linkedin_url=?, github_url=?
                     where id=?
                     """;
 
