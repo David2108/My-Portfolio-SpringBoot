@@ -4,7 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
+import com.portfolio.my_portfolio_backend.exception.ValidationException;
 import com.portfolio.my_portfolio_backend.model.Experience;
 import com.portfolio.my_portfolio_backend.repository.IExperienceRepository;
 
@@ -15,40 +20,39 @@ import lombok.RequiredArgsConstructor;
 public class ExperienceService implements IExperienceService{
 
     private final IExperienceRepository experienceRepository;
+    private final Validator validator;
 
     @Override
-    public Experience save(Experience experience) {
-        if(experience.getStartDate() == null){
-            throw new IllegalArgumentException("La fecha de incio de la experiencia no puede estar vacía.");
-        }
-        if(experience.getEndDate() != null && experience.getStartDate().isAfter(experience.getEndDate())){
-            throw new IllegalArgumentException("La fecha de inicio de la experiencia no puede ser posterior a la fecha fin");
-        }
-        if(experience.getJobTitle() == null || experience.getJobTitle().isBlank()){
-            throw new IllegalArgumentException("El titulo de trabajo no puede estar vacio");
-        }
-        if(experience.getCompanyName() == null || experience.getCompanyName().isBlank()){
-            throw new IllegalArgumentException("El nombre de la compañia no puede estar vacio");
-        }
-        return this.experienceRepository.save(experience);
-    }
-
-    @Override
-    public Optional<Experience> findbyId(Long id) {
-        return this.experienceRepository.findbyId(id);
-    }
-
-    @Override
+    @Transactional(readOnly = true)
     public List<Experience> findAll() {
         return this.experienceRepository.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public Optional<Experience> findbyId(Long id) {
+        return this.experienceRepository.findbyId(id);
+    }
+
+    @Override
+    @Transactional
+    public Experience save(Experience experience) {
+        BindingResult result = new BeanPropertyBindingResult(experience, "experience");
+        this.validator.validate(experience, result);
+        if(result.hasErrors()){
+            throw new ValidationException(result);
+        }
+        return this.experienceRepository.save(experience);
+    }
+
+    @Override
+    @Transactional
     public void deleteById(Long id) {
         this.experienceRepository.deleteById(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Experience> findByPesonalInfoId(Long personalInfoId) {
         return this.experienceRepository.findByPesonalInfoId(personalInfoId);
     }

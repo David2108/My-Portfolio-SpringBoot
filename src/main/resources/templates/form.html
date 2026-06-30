@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=h1, initial-scale=1.0">
+    <title>Formulario</title>
+</head>
+<body>
+    
+    <h1>Formulario de información personal</h1>
+
+    <form th:action="@{/personal-info-save}" th:object="${personalInfo}" method="post">
+        <div>
+            <label for=""firstName>Nombre</label>
+            <input type="text" id="firstName" th:field="*{firstName}">
+        </div>
+        <div>
+            <label for="lastName">Apellido</label>
+            <input type="text" id="lastName" th:field="*{lastName}">
+        </div>
+        <div>
+            <label for="">Titulo</label>
+            <input type="text" id="" th:field="*{title}">
+        </div>
+        <div>
+            <label for="title">Descripción del perfil</label>
+            <input type="text" id="title" th:field="*{profileDescription}">
+        </div>
+        <div>
+            <label for="profileImageUrl">Imagen del perfil</label>
+            <input type="text" id="profileImageUrl" th:field="*{profileImageUrl}">
+        </div>
+        <div>
+            <label for="yearsOfExperience">Años de experiencia</label>
+            <input type="text" id="yearsOfExperience" th:field="*{yearsOfExperience}">
+        </div>
+        <div>
+            <label for="email">Correo electrónico</label>
+            <input type="text" id="email" th:field="*{email}">
+        </div>
+        <div>
+            <label for="phone">Telefono</label>
+            <input type="text" id="phone" th:field="*{phone}">
+        </div>
+        <div>
+            <label for="">Linkedin Url</label>
+            <input type="text" id="linkedinUrl" th:field="*{linkedinUrl}">
+        </div>
+        <div>
+            <label for="">Github Url</label>
+            <input type="text" id="githubUrl" th:field="*{githubUrl}">
+        </div>
+        <button type="submit">Guardar</button>
+    </form>
+
+</body>
+</html>
