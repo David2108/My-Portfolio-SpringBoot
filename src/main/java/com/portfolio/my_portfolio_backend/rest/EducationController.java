@@ -34,11 +34,9 @@ public class EducationController {
     @GetMapping("/{id}")
     public ResponseEntity<Education> findById(@PathVariable Long id){
         Optional<Education> info = educationService.findbyId(id);
-        if(info.isPresent()){
-            return new ResponseEntity<>(info.get(), HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return info
+                .map(education -> new ResponseEntity<>(education, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping
