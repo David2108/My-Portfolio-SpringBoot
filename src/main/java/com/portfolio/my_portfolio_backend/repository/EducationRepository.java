@@ -39,7 +39,7 @@ public class EducationRepository implements IEducationRepository {
         if (education.getId() == null) {
             String sql = """
                     insert into educations (degree, institution, start_date, end_date, description, personal_info_id)
-                    values(?, ?, ?, ?)
+                    values(?, ?, ?, ?, ?, ?)
                     """;
             KeyHolder keyHolder = new GeneratedKeyHolder();
             this.jdbcTemplate.update(connection -> {

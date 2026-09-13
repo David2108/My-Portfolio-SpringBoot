@@ -22,14 +22,14 @@ import lombok.RequiredArgsConstructor;
 public class ExperienceRepository implements IExperienceRepository {
 
     private final JdbcTemplate jdbcTemplate;
-    private final RowMapper<Experience> skillRowMapper = (res, numRow) -> {
+    private final RowMapper<Experience> experienceRowMapper = (res, numRow) -> {
         Experience experience = new Experience();
         experience.setId(res.getLong("id"));
-        experience.setJobTitle(res.getString("name"));
-        experience.setCompanyName(res.getString("level_percentage"));
-        experience.setStartDate(res.getObject("icon_class", LocalDate.class));
-        experience.setEndDate(res.getObject("icon_class", LocalDate.class));
-        experience.setDescription(res.getString("icon_class"));
+        experience.setJobTitle(res.getString("job_title"));
+        experience.setCompanyName(res.getString("company_name"));
+        experience.setStartDate(res.getObject("start_date", LocalDate.class));
+        experience.setEndDate(res.getObject("end_date", LocalDate.class));
+        experience.setDescription(res.getString("description"));
         experience.setPersonalInfoId(res.getLong("personal_info_id"));
         return experience;
     };
@@ -38,8 +38,8 @@ public class ExperienceRepository implements IExperienceRepository {
     public Experience save(Experience experience) {
         if (experience.getId() == null) {
             String sql = """
-                    insert into experiences (job_title, company_code, start_date, end_date, description, personal_info_id)
-                    values(?, ?, ?, ?)
+                    insert into experiences (job_title, company_name, start_date, end_date, description, personal_info_id)
+                    values(?, ?, ?, ?, ?, ?)
                     """;
             KeyHolder keyHolder = new GeneratedKeyHolder();
             this.jdbcTemplate.update(connection -> {
@@ -56,7 +56,7 @@ public class ExperienceRepository implements IExperienceRepository {
         } else {
             String sql = """
                     update experiences
-                    set job_title=?, company_code=?, start_date=?, end_date=?, description=?, personal_info_id=?
+                    set job_title=?, company_name=?, start_date=?, end_date=?, description=?, personal_info_id=?
                     where id=?
                     """;
             this.jdbcTemplate.update(sql,
@@ -75,7 +75,7 @@ public class ExperienceRepository implements IExperienceRepository {
     public Optional<Experience> findbyId(Long id) {
         String sql = "select * from experiences where id=?";
         try {
-            return Optional.ofNullable(this.jdbcTemplate.queryForObject(sql, Objects.requireNonNull(skillRowMapper), id));
+            return Optional.ofNullable(this.jdbcTemplate.queryForObject(sql, Objects.requireNonNull(experienceRowMapper), id));
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
         }
@@ -84,7 +84,7 @@ public class ExperienceRepository implements IExperienceRepository {
     @Override
     public List<Experience> findAll() {
         String sql = "select * from experiences";
-        return this.jdbcTemplate.query(sql, Objects.requireNonNull(skillRowMapper));
+        return this.jdbcTemplate.query(sql, Objects.requireNonNull(experienceRowMapper));
     }
 
     @Override
@@ -98,7 +98,7 @@ public class ExperienceRepository implements IExperienceRepository {
         String sql = """
             select * from experiences where personal_info_id=?
         """;
-        return this.jdbcTemplate.query(sql, Objects.requireNonNull(skillRowMapper), personalInfoId);
+        return this.jdbcTemplate.query(sql, Objects.requireNonNull(experienceRowMapper), personalInfoId);
     }
 
 }

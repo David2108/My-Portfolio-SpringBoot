@@ -37,6 +37,7 @@ public class SkillService implements ISkillService{
     @Override
     @Transactional
     public Skill save(Skill skill) {
+        // Crea un conetenedor vacio donde ira guardando el errores de validación
         BindingResult result = new BeanPropertyBindingResult(skill, "skill");
         validator.validate(skill, result);
         if(result.hasErrors()){
