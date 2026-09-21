@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<section id="projects" th:fragment="projects">
+    <h2>MY PROJECTS</h2>
+    <div class="projects-grid">
+        <div class="project-card" th:each="project : ${projects}">
+            <img th:src="@{${project.imageUrl}}" th:alt="${project.title}">
+            <h3 th:text="${project.title}">Título del Proyecto</h3>
+            <p th:text="${project.description}">Descripçión del Proyecto</p>
+            <a th:href="@{project.projectUrl}" target="_blank">Ver Proyecto</a>
+        </div>
+    </div>
+</section>
+</body>
+</html>

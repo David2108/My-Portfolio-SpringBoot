@@ -47,7 +47,7 @@ public class PersonalInfoRepository implements IPersonalInfoRepository {
             String sql = """
                     insert into personal_info (first_name, last_name, title, profile_description, profile_image_url, years_of_experience, email, phone, linkedin_url, github_url)
                     values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                                        """;
+                                       \s""";
             KeyHolder keyHolder = new GeneratedKeyHolder();
             this.jdbcTemplate.update(connection -> {
                 // Prepara la ejecución de sql y debe retornar el campo id del nuevo registro

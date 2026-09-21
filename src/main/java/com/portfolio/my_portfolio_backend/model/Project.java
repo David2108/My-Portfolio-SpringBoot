@@ -11,7 +11,7 @@ public class Project {
     private Long id;
     private String title;
     private String description;
-    private String iamgeUrl;
+    private String imageUrl;
     private String projectUrl;
     private Long personalInfoId;
 }

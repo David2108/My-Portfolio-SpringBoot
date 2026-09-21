@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=h1, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/general.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style-form-project.css">
+    <title>Formulario</title>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div th:insert="fragments/nav :: nav"></div>
+    </div>
+</header>
+
+<h2>Formulario de Proyecto</h2>
+
+<main>
+    <div class="container">
+        <section id="contact">
+            <form class="contact-form" th:action="@{/projects/save}" th:object="${projectDto}" method="post"
+                  enctype="multipart/form-data">
+                <input type="text" th:field="*{title}" placeholder="Título" required>
+                <div th:if="${#fields.hasError('title')}" th:errors="*{title}" class="error-message"></div>
+
+                <textarea th:field="*{description}" placeholder="Descripción" rows="6" required></textarea>
+                <div th:if="${#fields.hasError('description')}" th:errors="*{description}" class="error-message"></div>
+
+                <input type="url" th:field="*{projectUrl}" placeholder="URL del Proyecto">
+                <div th:if="${#fields.hasError('title')}" th:errors="*{projectUrl}" class="error-message"></div>
+
+                <label>Imagen del Proyecto:</label>
+                <input type="file" name="file" required>
+                <div th:if="${#fields.hasError('imageUrl')}" th:errors="*{imageUrl}" class="error-message"></div>
+
+                <input type="number" th:field="*{personalInfoId}" placeholder="ID Información Personal" required>
+                <div th:if="${#fields.hasError('personalInfoId')}" th:errors="*{personalInfoId}" class="error-message"></div>
+
+                <button type="submit">Guardar</button>
+            </form>
+        </section>
+    </div>
+</main>
+
+<div th:insert="fragments/footer :: footer"></div>
+
+</body>
+</html>

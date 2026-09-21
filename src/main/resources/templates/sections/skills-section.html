@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<section id="skills" th:fragment="skills">
+  <h2>My Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-card" th:each="skill : ${skills}">
+      <img th:src="${skill.iconClass}" th:alt="${skill.name}">
+      <h3 th:text="${skill.name}"></h3>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

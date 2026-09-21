@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="hero-section" th:fragment="personal-info">
+    <h1>I'm <span th:text="${personalInfo.firstName} + ' ' + ${personalInfo.lastName}"></span> <br> <span th:text="${personalInfo.title}"></span></h1>
+    <div class="profile-image-container">
+        <img th:src="@{${personalInfo.profileImageUrl}}"
+             th:alt="${personalInfo.firstName + ' Profile Picture'}"
+             class="profile-picture">
+    </div>
+    <p th:text="${personalInfo.profileDescription}"></p>
+
+    <a href="#projects">
+        <button>MY PROJECTS</button>
+    </a>
+</div>
+
+</body>
+</html>
