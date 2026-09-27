@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class SkillService implements ISkillService{
+public class SkillServiceImpl implements ISkillService{
 
     private final ISkillRepository skillRepository;
 

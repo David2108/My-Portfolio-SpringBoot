@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class SkillServiceImplTest {
+public class SkillServiceImplImplTest {
 
     /*
         - Crea un mock del repositorio
@@ -33,7 +33,7 @@ public class SkillServiceImplTest {
         - Se usa la implementación
      */
     @InjectMocks
-    private SkillService skillService;
+    private SkillServiceImpl skillServiceImpl;
 
     @Mock
     private Validator validator;
@@ -44,7 +44,7 @@ public class SkillServiceImplTest {
         // Indica que cuando se llame all servicio findAll devuelva la lista mockSkills
         when(skillRepository.findAll()).thenReturn(mockSkills);
 
-        List<Skill> skills = skillService.findAll();
+        List<Skill> skills = skillServiceImpl.findAll();
 
         assertNotNull(skills);
         assertEquals(2, skills.size());
@@ -57,7 +57,7 @@ public class SkillServiceImplTest {
         Skill mockSkill = new Skill();
         when(skillRepository.findbyId(id)).thenReturn(Optional.of(mockSkill));
 
-        Optional<Skill> skillOptional = skillService.findbyId(id);
+        Optional<Skill> skillOptional = skillServiceImpl.findbyId(id);
 
         assertTrue(skillOptional.isPresent());
         assertEquals(mockSkill, skillOptional.get());
@@ -76,7 +76,7 @@ public class SkillServiceImplTest {
             return null;
         }).when(validator).validate(any(Skill.class), any(BindingResult.class));
 
-        assertThrows(ValidationException.class, () -> skillService.save(invalidSkill),
+        assertThrows(ValidationException.class, () -> skillServiceImpl.save(invalidSkill),
                 "Debe lanzarse una ValidationException si el objeto no es válido.");
 
         verify(skillRepository, never()).save(any(Skill.class));
@@ -88,7 +88,7 @@ public class SkillServiceImplTest {
         when(skillRepository.save(any(Skill.class))).thenReturn(validSkill);
         doNothing().when(validator).validate(any(Skill.class), any(BindingResult.class));
 
-        Skill savedSkill = skillService.save(validSkill);
+        Skill savedSkill = skillServiceImpl.save(validSkill);
 
         assertNotNull(savedSkill);
         verify(skillRepository, times(1)).save(validSkill);

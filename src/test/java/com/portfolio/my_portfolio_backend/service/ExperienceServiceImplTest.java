@@ -29,7 +29,7 @@ public class ExperienceServiceImplTest {
     private Validator validator;
 
     @InjectMocks
-    private ExperienceService experienceService;
+    private ExperienceServiceImpl experienceServiceImpl;
 
     @Test
     void testFindAllReturnsListOfExperience() {
@@ -38,7 +38,7 @@ public class ExperienceServiceImplTest {
         when(experienceRepository.findAll()).thenReturn(mockExperience);
 
         // Act
-        List<Experience> result = experienceService.findAll();
+        List<Experience> result = experienceServiceImpl.findAll();
 
         // Assert
         assertNotNull(result);
@@ -54,7 +54,7 @@ public class ExperienceServiceImplTest {
         when(experienceRepository.findbyId(experienceId)).thenReturn(Optional.of(mockExperience));
 
         // Act
-        Optional<Experience> result = experienceService.findbyId(experienceId);
+        Optional<Experience> result = experienceServiceImpl.findbyId(experienceId);
 
         // Assert
         assertTrue(result.isPresent());
@@ -74,7 +74,7 @@ public class ExperienceServiceImplTest {
         }).when(validator).validate(any(Experience.class), any(BindingResult.class));
 
         // Act & Assert
-        assertThrows(ValidationException.class, () -> experienceService.save(invalidExperience),
+        assertThrows(ValidationException.class, () -> experienceServiceImpl.save(invalidExperience),
                 "Debe lanzarse una ValidationException si el objeto no es válido.");
         verify(experienceRepository, never()).save(any(Experience.class));
     }
@@ -87,7 +87,7 @@ public class ExperienceServiceImplTest {
         doNothing().when(validator).validate(any(Experience.class), any(BindingResult.class));
 
         // Act
-        Experience savedExperience = experienceService.save(validExperience);
+        Experience savedExperience = experienceServiceImpl.save(validExperience);
 
         // Assert
         assertNotNull(savedExperience);

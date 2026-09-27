@@ -19,10 +19,17 @@
 <main>
     <div class="container">
         <section class="admin-section">
+
             <div class="admin-actions">
-                <a th:href="@{/experience}">Volver a la lista de Experiencias</a>
-                <a th:href="@{/logout}">Cerrar Sesión</a>
+                <button class="btn-logout" type="button" th:onclick="|window.location.href='@{/experience}'|">
+                    Volver a la lista de Experiencias
+                </button>
+                <form th:action="@{/logout}" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <button type="submit" class="btn-logout">Cerrar Sesión</button>
+                </form>
             </div>
+
             <h2 th:text="${experienceDto.id == null ? 'Crear Nueva Experiencia Laboral' : 'Editar Experiencia Laboral'}">Formulario de Experiencia Laboral</h2>
 
             <form th:action="@{/experience/save}" th:object="${experienceDto}" class="contact-form" method="post">

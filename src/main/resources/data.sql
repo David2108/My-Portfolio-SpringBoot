@@ -21,3 +21,5 @@ INSERT INTO experiences (job_title, company_name, start_date, end_date, descript
 INSERT INTO projects (title, description, image_url, project_url, personal_info_id) VALUES
                                                                                         ('Portfolio Personal', 'Un portafolio web para mostrar mis habilidades y proyectos.', 'img/projects/project2.jpg', 'https://github.com/myusername/my-portfolio', 1),
                                                                                         ('Aplicación de E-commerce', 'Plataforma de comercio electrónico con carrito de compras y pasarela de pago.', 'img/projects/project1.jpg', 'https://github.com/myusername/ecommerce-app', 1);
+
+INSERT INTO users (username, password, enabled) VALUES ('admin', '$2a$10$UgB0RY2LvMS2aTdgkpNuWu6VPIBTzKOAd.fkzgTFJKaykMD.kmv5e', TRUE);

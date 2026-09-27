@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-public class PersonalInfoServiceTest {
+public class PersonalInfoServiceImplTest {
     @Autowired
     private IPersonalInfoService personalInfoService;
     @Autowired

@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class ExperienceService implements IExperienceService{
+public class ExperienceServiceImpl implements IExperienceService{
 
     private final IExperienceRepository experienceRepository;
 

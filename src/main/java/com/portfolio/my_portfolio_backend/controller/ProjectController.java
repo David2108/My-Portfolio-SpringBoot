@@ -4,7 +4,7 @@ import com.portfolio.my_portfolio_backend.dto.ProjectDto;
 import com.portfolio.my_portfolio_backend.mapper.ProjectMapper;
 import com.portfolio.my_portfolio_backend.model.Project;
 import com.portfolio.my_portfolio_backend.service.FileStorageService;
-import com.portfolio.my_portfolio_backend.service.ProjectService;
+import com.portfolio.my_portfolio_backend.service.ProjectServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,12 +21,12 @@ import java.util.List;
 @RequestMapping("/projects")
 public class ProjectController {
 
-    private final ProjectService projectService;
+    private final ProjectServiceImpl projectServiceImpl;
     private final FileStorageService fileStorageService;
 
     @GetMapping
     public String getAll(Model model) {
-        List<ProjectDto> projects = projectService.findAll().stream()
+        List<ProjectDto> projects = projectServiceImpl.findAll().stream()
                 .map(ProjectMapper::toDto)
                 .toList();
         model.addAttribute("projects", projects);
@@ -55,7 +55,7 @@ public class ProjectController {
             String imageUrl = fileStorageService.storeFile(file);
             projectDto.setImageUrl("img/projects/" + imageUrl);
             Project project = ProjectMapper.toEntity(projectDto);
-            projectService.save(project);
+            projectServiceImpl.save(project);
             return "redirect:/projects";
         } catch (IOException e) {
             return "error-page";

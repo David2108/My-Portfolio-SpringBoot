@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ProjectService implements IProjectService{
+public class ProjectServiceImpl implements IProjectService{
 
     private final IProjectRepository projectRepository;
 

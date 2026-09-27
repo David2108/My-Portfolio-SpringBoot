@@ -28,7 +28,7 @@ public class PersonalInfoServiceImplTest {
     private Validator validator;
 
     @InjectMocks
-    private PersonalInfoService personalInfoService;
+    private PersonalInfoServiceImpl personalInfoServiceImpl;
 
     @Test
     void testFindAllReturnsListOfPersonalInfo() {
@@ -37,7 +37,7 @@ public class PersonalInfoServiceImplTest {
         when(personalInfoRepository.findAll()).thenReturn(mockPersonalInfo);
 
         // Act
-        List<PersonalInfo> result = personalInfoService.findAll();
+        List<PersonalInfo> result = personalInfoServiceImpl.findAll();
 
         // Assert
         assertNotNull(result);
@@ -53,7 +53,7 @@ public class PersonalInfoServiceImplTest {
         when(personalInfoRepository.findbyId(personalInfoId)).thenReturn(Optional.of(mockPersonalInfo));
 
         // Act
-        Optional<PersonalInfo> result = personalInfoService.findbyId(personalInfoId);
+        Optional<PersonalInfo> result = personalInfoServiceImpl.findbyId(personalInfoId);
 
         // Assert
         assertTrue(result.isPresent());
@@ -73,7 +73,7 @@ public class PersonalInfoServiceImplTest {
         }).when(validator).validate(any(PersonalInfo.class), any(BindingResult.class));
 
         // Act & Assert
-        assertThrows(ValidationException.class, () -> personalInfoService.save(invalidPersonalInfo),
+        assertThrows(ValidationException.class, () -> personalInfoServiceImpl.save(invalidPersonalInfo),
                 "Debe lanzarse una ValidationException si el objeto no es válido.");
         verify(personalInfoRepository, never()).save(any(PersonalInfo.class));
     }
@@ -86,7 +86,7 @@ public class PersonalInfoServiceImplTest {
         doNothing().when(validator).validate(any(PersonalInfo.class), any(BindingResult.class));
 
         // Act
-        PersonalInfo savedPersonalInfo = personalInfoService.save(validPersonalInfo);
+        PersonalInfo savedPersonalInfo = personalInfoServiceImpl.save(validPersonalInfo);
 
         // Assert
         assertNotNull(savedPersonalInfo);

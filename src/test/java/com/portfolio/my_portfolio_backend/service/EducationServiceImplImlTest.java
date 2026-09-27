@@ -21,7 +21,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class EducationServiceImlTest {
+public class EducationServiceImplImlTest {
 
     @Mock
     private IEducationRepository  educationRepository;
@@ -30,7 +30,7 @@ public class EducationServiceImlTest {
     private Validator validator;
 
     @InjectMocks
-    private EducationService educationService;
+    private EducationServiceImpl educationServiceImpl;
 
     @Test
     void testFindAllReturnsListOfEducation() {
@@ -39,7 +39,7 @@ public class EducationServiceImlTest {
         when(educationRepository.findAll()).thenReturn(mockEducation);
 
         // Act
-        List<Education> result = educationService.findAll();
+        List<Education> result = educationServiceImpl.findAll();
 
         // Assert
         assertNotNull(result);
@@ -55,7 +55,7 @@ public class EducationServiceImlTest {
         when(educationRepository.findbyId(educationId)).thenReturn(Optional.of(mockEducation));
 
         // Act
-        Optional<Education> result = educationService.findbyId(educationId);
+        Optional<Education> result = educationServiceImpl.findbyId(educationId);
 
         // Assert
         assertTrue(result.isPresent());
@@ -75,7 +75,7 @@ public class EducationServiceImlTest {
         }).when(validator).validate(any(Education.class), any(BindingResult.class));
 
         // Act & Assert
-        assertThrows(ValidationException.class, () -> educationService.save(invalidEducation),
+        assertThrows(ValidationException.class, () -> educationServiceImpl.save(invalidEducation),
                 "Debe lanzarse una ValidationException si el objeto no es válido.");
         verify(educationRepository, never()).save(any(Education.class));
     }
@@ -88,7 +88,7 @@ public class EducationServiceImlTest {
         doNothing().when(validator).validate(any(Education.class), any(BindingResult.class));
 
         // Act
-        Education savedEducation = educationService.save(validEducation);
+        Education savedEducation = educationServiceImpl.save(validEducation);
 
         // Assert
         assertNotNull(savedEducation);

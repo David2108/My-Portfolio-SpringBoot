@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class EducationService implements IEducationService{
+public class EducationServiceImpl implements IEducationService{
 
     private final IEducationRepository educationRepository;
 
