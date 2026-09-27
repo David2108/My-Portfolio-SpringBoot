@@ -1,5 +1,6 @@
-package com.portfolio.my_portfolio_backend.dto;
+package com.portfolio.my_portfolio_backend.mapper;
 
+import com.portfolio.my_portfolio_backend.dto.ProjectDto;
 import com.portfolio.my_portfolio_backend.model.Project;
 
 public class ProjectMapper {

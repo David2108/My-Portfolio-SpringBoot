@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/personal-info")
 @RequiredArgsConstructor
-public class PersonalInfoController {
+public class PersonalInfoRestController {
 
     private final IPersonalInfoService personalInfoService;
 

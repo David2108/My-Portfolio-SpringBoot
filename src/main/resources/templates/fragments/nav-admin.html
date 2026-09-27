@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav th:fragment="nav-admin">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a th:href="@{/personal-info}">Personal Info</a></li>
+        <li><a th:href="@{/education}">Education</a></li>
+        <li><a th:href="@{/experience}">Experience</a></li>
+        <li><a th:href="@{/projects}">Projects</a></li>
+        <li><a th:href="@{/skills}">Skills</a></li>
+    </ul>
+</nav>
+</body>
+</html>

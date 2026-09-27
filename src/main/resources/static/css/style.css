@@ -11,7 +11,6 @@ header {
     background-size: cover;
     background-position: center;
     position: relative;
-    overflow: hidden;
 }
 
 .profile-image-container {
@@ -86,6 +85,14 @@ header nav ul li a:hover {
 /* Sección "WHO AM I ?" */
 main .container {
     background-color: var(--color-dark);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.admin-section {
+    flex-grow: 1;
 }
 
 #about {
@@ -330,4 +337,71 @@ footer {
 .error-page a:hover {
     background-color: var(--color-dark);
     color: var(--color-primary-gold);
+}
+
+/* En general.css o style.css */
+.message-success {
+    background-color: #d4edda; /* Verde claro */
+    color: #155724; /* Verde oscuro */
+    border: 1px solid #c3e6cb;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.message-error {
+    background-color: #f8d7da; /* Rojo claro */
+    color: #721c24; /* Rojo oscuro */
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+/* Estilos para el botón de Editar */
+.btn-edit {
+    display: inline-block; /* Para que el padding y margin funcionen correctamente */
+    padding: 8px 15px;
+    margin-right: 5px; /* Pequeño espacio a la derecha si hay otro botón */
+    background-color: #4CAF50; /* Un verde amigable */
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-edit:hover {
+    background-color: #45a049; /* Un verde un poco más oscuro al pasar el ratón */
+}
+
+/* Estilos para el botón de Eliminar */
+.btn-delete {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #f44336; /* Un rojo para indicar peligro */
+    color: white;
+    text-align: center;
+    text-decoration: none; /* Asegura que no se vea como un enlace */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-delete:hover {
+    background-color: #da190b; /* Un rojo más oscuro al pasar el ratón */
+}
+
+@media (max-width: 768px) {
+    header nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header nav ul li {
+        margin: 10px 0;
+    }
 }

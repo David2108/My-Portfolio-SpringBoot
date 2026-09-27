@@ -8,7 +8,9 @@
     --color-white:#ffffff;
 }
 
-html{
+html, body{
+    height: 100%;
+    min-height: 100vh;
     font-size: 62.5%;
     box-sizing: border-box;
     font-family: "Roboto", sans-serif;
@@ -23,16 +25,12 @@ body{
     line-height: 1.6; /* Espaciado entre líneas */
     color: #333; /* Color de texto base */
     background-color: #f4f4f4; /* Un fondo suave para la página */
+    display: flex;
+    flex-direction: column;
 }
 
-/* Estilos para las secciones principales */
-main section {
-    padding: 40px 0; /* Espaciado interno para las secciones */
-    border-bottom: 1px solid #ddd; /* Separador entre secciones */
-}
-
-main section:last-child {
-    border-bottom: none; /* Quitar el borde de la última sección */
+main {
+    flex-grow: 1;
 }
 
 main h2 {
@@ -56,4 +54,9 @@ footer a {
 
 footer a:hover {
     text-decoration: underline;
+}
+
+.line-white {
+    padding: 40px 0;
+    border-bottom: 1px solid #ddd;
 }

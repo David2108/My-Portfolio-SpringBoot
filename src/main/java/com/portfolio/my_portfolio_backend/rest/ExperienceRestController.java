@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/experience")
 @RequiredArgsConstructor
-public class ExperienceController {
+public class ExperienceRestController {
 
     private final IExperienceService experienceService;
 

@@ -5,11 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.BeanPropertyBindingResult;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
 
-import com.portfolio.my_portfolio_backend.exception.ValidationException;
 import com.portfolio.my_portfolio_backend.model.Experience;
 import com.portfolio.my_portfolio_backend.repository.IExperienceRepository;
 
@@ -20,7 +16,6 @@ import lombok.RequiredArgsConstructor;
 public class ExperienceService implements IExperienceService{
 
     private final IExperienceRepository experienceRepository;
-    private final Validator validator;
 
     @Override
     @Transactional(readOnly = true)
@@ -37,11 +32,6 @@ public class ExperienceService implements IExperienceService{
     @Override
     @Transactional
     public Experience save(Experience experience) {
-        BindingResult result = new BeanPropertyBindingResult(experience, "experience");
-        this.validator.validate(experience, result);
-        if(result.hasErrors()){
-            throw new ValidationException(result);
-        }
         return this.experienceRepository.save(experience);
     }
 

@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/skills")
 @RequiredArgsConstructor
-public class SkillController {
+public class SkillRestController {
 
     private final ISkillService skillService;
 
